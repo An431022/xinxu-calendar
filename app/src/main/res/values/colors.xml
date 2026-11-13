@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFDF8F6</color>
+    <!-- Compose 画第一帧之前露出的窗口底色，跟主题的 background 对齐，避免闪白 -->
+    <color name="window_background">#F8F9FA</color>
+</resources>

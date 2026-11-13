@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  图标就是产品本身：一条被分成三段的色条 —— 一天可以有一种颜色，也可以有好几种。
+  三段用色板里的玫瑰 / 琥珀 / 晴空，一暖一中一冷。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:fillColor="#E689B0"
+        android:pathData="M30,47 H46 V61 H30 Z" />
+    <path
+        android:fillColor="#CFA63C"
+        android:pathData="M46,47 H62 V61 H46 Z" />
+    <path
+        android:fillColor="#53B2C7"
+        android:pathData="M62,47 H78 V61 H62 Z" />
+
+</vector>

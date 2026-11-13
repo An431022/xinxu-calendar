@@ -1,0 +1,52 @@
+[versions]
+agp = "9.4.1"
+kotlin = "2.4.20"
+composeBom = "2026.06.01"
+coreKtx = "1.19.1"
+activityCompose = "1.13.0"
+lifecycle = "2.11.0"
+# KSP 最新的独立版本号只到 2.3.12（旧的 2.0.21-1.0.28 那种 Kotlin 耦合命名已经停用）。
+# 我们的 Kotlin 是 2.4.20 —— 能不能配上，靠一次真实构建来验证，别猜。
+ksp = "2.3.12"
+room = "2.8.5"
+# material3 单独走 beta 通道（其余 Compose 库仍由 BOM 管）。
+# 原因：1.4.0 稳定版把 MaterialExpressiveTheme 和 MotionScheme 标成了 internal，
+# app 代码够不着（编译报 INVISIBLE_REFERENCE）；expressive 在 1.5.0-beta 里是公开的。
+material3 = "1.5.0-beta01"
+# HCT 色彩空间。只给调试用的调色盘算「彩度 / 明度」——
+# 十二色的色值本身仍然是 tools/palette/generate.mjs 用同一个算法算出来再回填的，
+# 运行时不靠它取色，所以这个依赖**不该出现在渲染路径上**。
+# 用第三方封装（Apache 2.0）而不是官方 material-color-utilities：后者没有发布到 Maven，
+# 只以源码形式存在，而它大部分体积是动态配色的代码，我们一个都用不上。
+hct = "1.0.2"
+# 农历 / 节气 / 传统节日。纯 Java、无第三方依赖、不联网。
+# 只求它算得对：自己写天文算法不现实，而这本日历最不能错的就是农历。
+lunar = "1.7.4"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
+
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+# HCT（色相 / 彩度 / 明度）换算。仅在调色盘里用来提示"这个色离不刺眼的范围有多远"。
+kyant-hct = { group = "io.github.kyant0.hct", name = "hct", version.ref = "hct" }
+
+# 农历 / 节气 / 节日（cn.6tail:lunar）。
+lunar = { group = "cn.6tail", name = "lunar", version.ref = "lunar" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

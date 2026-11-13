@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>备注索引 · 展开态原型</title>
+<style>
+  :root {
+    --bg: #F7F8F9;
+    --surface: #FFFFFF;
+    --text: #191C1E;
+    --muted: #6B7075;
+    --chip: #DFE0E2;
+    --outline: #C9CCCF;
+    --today: #B3261E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    background: #E9EBED;
+    color: var(--text);
+    display: flex; justify-content: center;
+    padding: 28px 16px 48px;
+  }
+  .phone {
+    width: 392px;
+    background: var(--bg);
+    border-radius: 28px;
+    padding: 18px 14px 22px;
+    box-shadow: 0 18px 48px rgba(0,0,0,.14);
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 6px 10px;
+  }
+  .title { font-size: 26px; font-weight: 700; letter-spacing: -.5px; }
+  .title .tri { font-size: 13px; color: var(--muted); margin-left: 4px; }
+  .toggle {
+    border: 0; background: var(--chip); color: var(--text);
+    font-size: 12px; padding: 7px 13px; border-radius: 999px; cursor: pointer;
+    font-family: inherit;
+  }
+  .toggle:hover { filter: brightness(.96); }
+  .weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin: 4px 0 6px; }
+  .weekdays span { text-align: center; font-size: 12px; color: var(--muted); }
+  .grid {
+    display: grid;
+    /* minmax(0, 1fr)：列宽必须能被压窄，否则 nowrap 的标签会把整列撑破、跨到邻格去。 */
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    row-gap: 6px;
+  }
+  .cell {
+    min-width: 0;
+    min-height: var(--cell-h, 62px);
+    padding: 4px 2px 6px;
+    display: flex; flex-direction: column; align-items: center; gap: 1px;
+    position: relative; border-radius: 10px;
+    transition: background .15s, min-height .2s;
+    cursor: pointer;
+  }
+  .cell.empty { visibility: hidden; }
+  .cell.today { background: var(--today); color: #fff; }
+  .cell.selected { background: var(--text); color: #fff; }
+  .num { font-size: 18px; line-height: 22px; font-weight: 500; }
+  .lunar { font-size: 11px; color: var(--muted); line-height: 14px; }
+  .fest { font-size: 10px; color: var(--muted); line-height: 13px; }
+  .cell.today .lunar, .cell.today .fest,
+  .cell.selected .lunar, .cell.selected .fest { color: rgba(255,255,255,.82); }
+  .dot {
+    position: absolute; top: 5px; right: 6px;
+    width: 5px; height: 5px; border-radius: 50%;
+  }
+  .strip {
+    width: 26%; height: 3px; border-radius: 2px;
+    margin-top: 4px;
+  }
+  .chips { width: 100%; min-width: 0; display: flex; flex-direction: column; gap: 3px; margin-top: 3px; }
+  .chip {
+    background: var(--chip); color: var(--text);
+    font-size: 10px; line-height: 16px;
+    padding: 0 4px; border-radius: 5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 100%; text-align: left;
+  }
+  .cell.today .chip, .cell.selected .chip {
+    background: rgba(255,255,255,.22); color: #fff;
+  }
+  .more { color: var(--muted); font-size: 11px; line-height: 16px; text-align: center; }
+  .cell.today .more, .cell.selected .more { color: rgba(255,255,255,.8); }
+
+  .grid.expanded { --cell-h: 152px; row-gap: 4px; }
+  .grid.expanded .cell { padding-top: 6px; }
+  .grid.expanded .chips { gap: 4px; }
+  .grid.expanded .strip { display: none; }
+
+  .legend {
+    margin-top: 20px; padding: 0 6px;
+    font-size: 12px; color: var(--muted); line-height: 1.9;
+  }
+  .legend b { color: var(--text); font-weight: 600; }
+  .legend .rule { height: 1px; background: var(--outline); opacity: .5; margin: 10px 0; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <header>
+    <div class="title">2026年11月<span class="tri">▾</span></div>
+    <button class="toggle" id="toggle">展开</button>
+  </header>
+
+  <div class="weekdays">
+    <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <div class="legend">
+    <p><b>展开态</b>：日期格拉高，每格最多放 <b>5 行</b>——<b>4 条备注 + 第 5 行「…」</b>。
+       标签只留开头的字（约 3 个字），起索引作用，不显示全文。</p>
+    <div class="rule"></div>
+    <p><b>色彩小圆点</b>：日期右上角，取当天第一个颜色；<b>不放色条</b>（折叠态的原色条仍在）。</p>
+    <p><b>点日期</b>：收起展开态、回到正常月视图，并选中那一天——这时候看到的备注就是完整的了。</p>
+  </div>
+</div>
+
+<script>
+const monthData = (() => {
+  // 2026-11-01 是周日；周一为第一列 → 前面空 6 格
+  const cells = Array.from({ length: 6 }, () => null);
+  const data = {
+    1:  { lunar: "廿三", fest: "万圣节", dot: "#4A90C2" },
+    2:  { lunar: "廿四" },
+    3:  { lunar: "廿五", dot: "#E08A3C" },
+    4:  { lunar: "廿六", dot: "#8E7CC3" },
+    5:  { lunar: "廿七", dot: "#3FAE8C" },
+    6:  { lunar: "廿八", dot: "#E08A3C" },
+    7:  { lunar: "立冬", fest: "立冬" },
+    8:  { lunar: "三十", dot: "#8E7CC3" },
+    9:  { lunar: "十月", dot: "#8E7CC3" },
+    10: { lunar: "初二" },
+    11: { lunar: "初三", dot: "#E08A3C", notes: ["光棍节", "双十一购物清单", "凑单买了个保温杯", "快递全到楼下了", "这条是第五行，会被省略"] },
+    12: { lunar: "初四" },
+    13: { lunar: "初五", today: true, dot: "#B3261E", notes: ["今天降温了，外套翻出来", "晚上煮了热汤面"] },
+    14: { lunar: "初六" },
+    15: { lunar: "初七" },
+    16: { lunar: "初八", dot: "#3FAE8C" },
+    17: { lunar: "初九" },
+    18: { lunar: "初十" },
+    19: { lunar: "十一" },
+    20: { lunar: "十二" },
+    21: { lunar: "十三" },
+    22: { lunar: "小雪", fest: "小雪" },
+    23: { lunar: "十五" },
+    24: { lunar: "十六" },
+    25: { lunar: "十七" },
+    26: { lunar: "十八", fest: "感恩节" },
+    27: { lunar: "十九", dot: "#E08A3C" },
+    28: { lunar: "二十" },
+    29: { lunar: "廿一" },
+    30: { lunar: "廿二" },
+  };
+  for (let d = 1; d <= 30; d++) cells.push({ day: d, ...data[d] });
+  return cells;
+})();
+
+const grid = document.getElementById("grid");
+const toggle = document.getElementById("toggle");
+let expanded = false;
+let selectedDay = null;
+
+function render() {
+  grid.classList.toggle("expanded", expanded);
+  toggle.textContent = expanded ? "收起" : "展开";
+
+  grid.innerHTML = monthData.map(cell => {
+    if (!cell) return `<div class="cell empty"></div>`;
+    const cls = ["cell"];
+    if (cell.today) cls.push("today");
+    if (selectedDay === cell.day) cls.push("selected");
+
+    const dot = cell.dot ? `<span class="dot" style="background:${cell.dot}"></span>` : "";
+    const strip = (!expanded && cell.dot)
+      ? `<span class="strip" style="background:${cell.dot}"></span>`
+      : "";
+    const fest = cell.fest ? `<span class="fest">${cell.fest}</span>` : "";
+
+    let chips = "";
+    if (expanded && cell.notes && cell.notes.length) {
+      const shown = cell.notes.slice(0, 4);
+      const hasMore = cell.notes.length > 4;
+      chips = `<div class="chips">${
+        shown.map(n => `<span class="chip">${n}</span>`).join("")
+      }${hasMore ? `<span class="more">…</span>` : ""}</div>`;
+    }
+
+    return `<div class="${cls.join(" ")}" data-day="${cell.day}">
+      ${dot}<span class="num">${cell.day}</span>
+      <span class="lunar">${cell.lunar}</span>${fest}${strip}${chips}
+    </div>`;
+  }).join("");
+}
+
+grid.addEventListener("click", (e) => {
+  const cell = e.target.closest(".cell[data-day]");
+  if (!cell) return;
+  if (expanded) {
+    // 找到目标日期：收起展开态、回到正常月视图并选中它
+    selectedDay = Number(cell.dataset.day);
+    expanded = false;
+  } else {
+    selectedDay = Number(cell.dataset.day);
+  }
+  render();
+});
+
+toggle.addEventListener("click", () => {
+  expanded = !expanded;
+  if (expanded) selectedDay = null;
+  render();
+});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      刻意不声明 android.permission.INTERNET：心绪日历是纯本地应用，
+      记录只存在这台手机上，不联网、不上传、不统计。
+      v0.2 若要联网更新法定节假日数据，届时再加，并在这里写清用途。
+    -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.XinxuCalendar">
+
+        <!--
+          windowSoftInputMode 必须显式写成 adjustNothing。
+          不写的话系统默认挑 adjust=pan：键盘一弹，**整个窗口被向上平移**，
+          日历连标题一起被顶到状态栏底下（真机上实测到的重叠就是这么来的），
+          而面板那边我们又用 imePadding() 自己顶了一次 —— 等于同一个键盘高度被算了两次。
+          写成 adjustNothing 之后窗口尺寸和位置都不动，键盘高度只通过 WindowInsets.ime
+          交给 Compose（enableEdgeToEdge + decorFitsSystemWindows=false 下这个值始终可用），
+          由 BottomCenter + imePadding() 那一处统一负责。
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.XinxuCalendar"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

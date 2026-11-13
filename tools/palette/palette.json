@@ -1,0 +1,554 @@
+{
+  "generatedBy": "@material/material-color-utilities",
+  "chromaCap": 48,
+  "colors": [
+    {
+      "id": "warm_rose",
+      "name": "玫瑰",
+      "temperature": "warm",
+      "meaning": "心动、柔软",
+      "hct": {
+        "hue": 355,
+        "chroma": 44,
+        "tone": 68
+      },
+      "light": "#e689b0",
+      "dark": "#ffbcd5"
+    },
+    {
+      "id": "warm_flame",
+      "name": "朱红",
+      "temperature": "warm",
+      "meaning": "热烈、激动、生气",
+      "hct": {
+        "hue": 33.3,
+        "chroma": 79,
+        "tone": 56.1
+      },
+      "light": "#ed5126",
+      "dark": "#ff9072"
+    },
+    {
+      "id": "warm_honey",
+      "name": "蜜橘",
+      "temperature": "warm",
+      "meaning": "充实、有干劲",
+      "hct": {
+        "hue": 55,
+        "chroma": 48,
+        "tone": 68
+      },
+      "light": "#eb9046",
+      "dark": "#ffc298"
+    },
+    {
+      "id": "warm_amber",
+      "name": "琥珀",
+      "temperature": "warm",
+      "meaning": "开心、轻快",
+      "hct": {
+        "hue": 88,
+        "chroma": 44,
+        "tone": 70
+      },
+      "light": "#cfa63c",
+      "dark": "#fccf61"
+    },
+    {
+      "id": "warm_caramel",
+      "name": "焦糖",
+      "temperature": "warm",
+      "meaning": "踏实、沉稳",
+      "hct": {
+        "hue": 42,
+        "chroma": 28,
+        "tone": 52
+      },
+      "light": "#a86e55",
+      "dark": "#d49479"
+    },
+    {
+      "id": "cool_moss",
+      "name": "苔绿",
+      "temperature": "cool",
+      "meaning": "缓慢、满足",
+      "hct": {
+        "hue": 135,
+        "chroma": 28,
+        "tone": 58
+      },
+      "light": "#7a9364",
+      "dark": "#a1bb89"
+    },
+    {
+      "id": "cool_mint",
+      "name": "薄荷",
+      "temperature": "cool",
+      "meaning": "清爽、放松",
+      "hct": {
+        "hue": 170,
+        "chroma": 34,
+        "tone": 68
+      },
+      "light": "#6fb398",
+      "dark": "#97ddc0"
+    },
+    {
+      "id": "cool_sky",
+      "name": "晴空",
+      "temperature": "cool",
+      "meaning": "平静、清醒",
+      "hct": {
+        "hue": 215,
+        "chroma": 40,
+        "tone": 68
+      },
+      "light": "#53b2c7",
+      "dark": "#7fdcf2"
+    },
+    {
+      "id": "cool_deep",
+      "name": "深海",
+      "temperature": "cool",
+      "meaning": "低落、沉思",
+      "hct": {
+        "hue": 255,
+        "chroma": 40,
+        "tone": 52
+      },
+      "light": "#4f7fb5",
+      "dark": "#77a6df"
+    },
+    {
+      "id": "cool_mist",
+      "name": "雾紫",
+      "temperature": "cool",
+      "meaning": "忧郁、敏感",
+      "hct": {
+        "hue": 300,
+        "chroma": 30,
+        "tone": 68
+      },
+      "light": "#ae9ed1",
+      "dark": "#d7c7fc"
+    },
+    {
+      "id": "neutral_cloud",
+      "name": "云灰",
+      "temperature": "neutral",
+      "meaning": "平淡、记不清",
+      "hct": {
+        "hue": 250,
+        "chroma": 6,
+        "tone": 78
+      },
+      "light": "#bfc1c7",
+      "dark": "#dbdde2"
+    },
+    {
+      "id": "neutral_ink",
+      "name": "石墨",
+      "temperature": "neutral",
+      "meaning": "沉重、黑暗",
+      "hct": {
+        "hue": 250,
+        "chroma": 8,
+        "tone": 44
+      },
+      "light": "#636870",
+      "dark": "#8a8e96"
+    }
+  ],
+  "ladders": [
+    {
+      "name": "玫瑰",
+      "hue": 355,
+      "chroma": 44,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#5a1538"
+        },
+        {
+          "tone": 30,
+          "hex": "#762d4f"
+        },
+        {
+          "tone": 40,
+          "hex": "#924467"
+        },
+        {
+          "tone": 50,
+          "hex": "#b05c81"
+        },
+        {
+          "tone": 60,
+          "hex": "#ce759b"
+        },
+        {
+          "tone": 70,
+          "hex": "#ec8fb6"
+        },
+        {
+          "tone": 80,
+          "hex": "#ffb0cf"
+        },
+        {
+          "tone": 90,
+          "hex": "#ffd9e5"
+        }
+      ]
+    },
+    {
+      "name": "朱红",
+      "hue": 33.3,
+      "chroma": 79,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#611300"
+        },
+        {
+          "tone": 30,
+          "hex": "#881f00"
+        },
+        {
+          "tone": 40,
+          "hex": "#b22b00"
+        },
+        {
+          "tone": 50,
+          "hex": "#d74217"
+        },
+        {
+          "tone": 60,
+          "hex": "#fb5b2f"
+        },
+        {
+          "tone": 70,
+          "hex": "#ff8b6c"
+        },
+        {
+          "tone": 80,
+          "hex": "#ffb5a1"
+        },
+        {
+          "tone": 90,
+          "hex": "#ffdbd1"
+        }
+      ]
+    },
+    {
+      "name": "蜜橘",
+      "hue": 55,
+      "chroma": 48,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#4f2500"
+        },
+        {
+          "tone": 30,
+          "hex": "#703700"
+        },
+        {
+          "tone": 40,
+          "hex": "#944b00"
+        },
+        {
+          "tone": 50,
+          "hex": "#b3621b"
+        },
+        {
+          "tone": 60,
+          "hex": "#d27b33"
+        },
+        {
+          "tone": 70,
+          "hex": "#f2954b"
+        },
+        {
+          "tone": 80,
+          "hex": "#ffb783"
+        },
+        {
+          "tone": 90,
+          "hex": "#ffdcc5"
+        }
+      ]
+    },
+    {
+      "name": "琥珀",
+      "hue": 88,
+      "chroma": 44,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#3f2e00"
+        },
+        {
+          "tone": 30,
+          "hex": "#5a4300"
+        },
+        {
+          "tone": 40,
+          "hex": "#775a00"
+        },
+        {
+          "tone": 50,
+          "hex": "#957200"
+        },
+        {
+          "tone": 60,
+          "hex": "#b28b23"
+        },
+        {
+          "tone": 70,
+          "hex": "#cfa63c"
+        },
+        {
+          "tone": 80,
+          "hex": "#edc155"
+        },
+        {
+          "tone": 90,
+          "hex": "#ffdf98"
+        }
+      ]
+    },
+    {
+      "name": "焦糖",
+      "hue": 42,
+      "chroma": 28,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#4e2511"
+        },
+        {
+          "tone": 30,
+          "hex": "#6a3a25"
+        },
+        {
+          "tone": 40,
+          "hex": "#85513a"
+        },
+        {
+          "tone": 50,
+          "hex": "#a26951"
+        },
+        {
+          "tone": 60,
+          "hex": "#bf8268"
+        },
+        {
+          "tone": 70,
+          "hex": "#dd9c81"
+        },
+        {
+          "tone": 80,
+          "hex": "#fbb79a"
+        },
+        {
+          "tone": 90,
+          "hex": "#ffdbcd"
+        }
+      ]
+    },
+    {
+      "name": "苔绿",
+      "hue": 135,
+      "chroma": 28,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#213610"
+        },
+        {
+          "tone": 30,
+          "hex": "#374d25"
+        },
+        {
+          "tone": 40,
+          "hex": "#4e653a"
+        },
+        {
+          "tone": 50,
+          "hex": "#667e51"
+        },
+        {
+          "tone": 60,
+          "hex": "#7f9869"
+        },
+        {
+          "tone": 70,
+          "hex": "#99b381"
+        },
+        {
+          "tone": 80,
+          "hex": "#b4cf9b"
+        },
+        {
+          "tone": 90,
+          "hex": "#d0ebb5"
+        }
+      ]
+    },
+    {
+      "name": "薄荷",
+      "hue": 170,
+      "chroma": 34,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#003828"
+        },
+        {
+          "tone": 30,
+          "hex": "#00513c"
+        },
+        {
+          "tone": 40,
+          "hex": "#236a52"
+        },
+        {
+          "tone": 50,
+          "hex": "#3f836a"
+        },
+        {
+          "tone": 60,
+          "hex": "#5a9e83"
+        },
+        {
+          "tone": 70,
+          "hex": "#74b99d"
+        },
+        {
+          "tone": 80,
+          "hex": "#8fd5b8"
+        },
+        {
+          "tone": 90,
+          "hex": "#abf1d3"
+        }
+      ]
+    },
+    {
+      "name": "晴空",
+      "hue": 215,
+      "chroma": 40,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#00363f"
+        },
+        {
+          "tone": 30,
+          "hex": "#004e5b"
+        },
+        {
+          "tone": 40,
+          "hex": "#006878"
+        },
+        {
+          "tone": 50,
+          "hex": "#098396"
+        },
+        {
+          "tone": 60,
+          "hex": "#399db1"
+        },
+        {
+          "tone": 70,
+          "hex": "#59b8cd"
+        },
+        {
+          "tone": 80,
+          "hex": "#76d4e9"
+        },
+        {
+          "tone": 90,
+          "hex": "#a7edff"
+        }
+      ]
+    },
+    {
+      "name": "深海",
+      "hue": 255,
+      "chroma": 40,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#003259"
+        },
+        {
+          "tone": 30,
+          "hex": "#0b497c"
+        },
+        {
+          "tone": 40,
+          "hex": "#2e6195"
+        },
+        {
+          "tone": 50,
+          "hex": "#4a7ab0"
+        },
+        {
+          "tone": 60,
+          "hex": "#6594cb"
+        },
+        {
+          "tone": 70,
+          "hex": "#80aee8"
+        },
+        {
+          "tone": 80,
+          "hex": "#a0c9ff"
+        },
+        {
+          "tone": 90,
+          "hex": "#d2e4ff"
+        }
+      ]
+    },
+    {
+      "name": "雾紫",
+      "hue": 300,
+      "chroma": 30,
+      "tones": [
+        {
+          "tone": 20,
+          "hex": "#352954"
+        },
+        {
+          "tone": 30,
+          "hex": "#4c406c"
+        },
+        {
+          "tone": 40,
+          "hex": "#655785"
+        },
+        {
+          "tone": 50,
+          "hex": "#7e709f"
+        },
+        {
+          "tone": 60,
+          "hex": "#9889ba"
+        },
+        {
+          "tone": 70,
+          "hex": "#b3a3d6"
+        },
+        {
+          "tone": 80,
+          "hex": "#cfbef3"
+        },
+        {
+          "tone": 90,
+          "hex": "#e9ddff"
+        }
+      ]
+    }
+  ]
+}
